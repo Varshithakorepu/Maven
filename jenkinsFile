@@ -26,7 +26,7 @@ pipeline {
 
         stage('Run JAR') {
             steps {
-                bat 'java -jar target/demo-maven-1.0-SNAPSHOT.jar'
+                bat 'java -cp target/demo-maven-1.0-SNAPSHOT.jar com.example.App'
             }
         }
     }
