@@ -2,7 +2,8 @@ pipeline {
     agent any
 
     tools {
-        jdk 'JDK21'    // must match the name you gave in Jenkins tool confi
+        jdk 'JDK21'
+        maven 'Maven3'
     }
 
     stages {
@@ -14,13 +15,14 @@ pipeline {
 
         stage('Build & Test') {
             steps {
-                bat 'mvn -B clean test'
+                bat 'mvn -B clean package'
             }
         }
 
         stage('Archive') {
             steps {
-                archiveArtifacts artifacts: 'target/demo-maven-1.0-SNAPSHOT.jar', fingerprint: true
+                // archive all jars inside any target folder
+                archiveArtifacts artifacts: '**/target/*.jar', fingerprint: true
             }
         }
     }
