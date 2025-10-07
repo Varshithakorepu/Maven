@@ -20,8 +20,13 @@ pipeline {
 
         stage('Archive') {
             steps {
-                // archive all jars inside any target folder
                 archiveArtifacts artifacts: '**/target/*.jar', fingerprint: true
+            }
+        }
+
+        stage('Run JAR') {
+            steps {
+                bat 'java -jar target/demo-maven-1.0-SNAPSHOT.jar'
             }
         }
     }
